@@ -7,7 +7,7 @@ import br.com.gms.AppPessoas.model.Contato;
 
 public interface ContatoServiceInterface {
 
-	ContatoServiceInterface save(Contato contato);
+	Contato save(Contato contato);
 	Optional<Contato> getById(Long id);
 	List<Contato> getAll();
 	Contato update(Contato contato);

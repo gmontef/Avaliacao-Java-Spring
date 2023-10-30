@@ -53,7 +53,7 @@ public class Contato {
 		this.pessoa = pessoa;
 	}
 
-	public int isTipocontato() {
+	public int getTipocontato() {
 		return tipocontato;
 	}
 
