@@ -44,6 +44,7 @@ public class ContatoService implements ContatoServiceInterface{
 		        //atualizar
 				if(upContato.isPresent()) {
 					Contato newContato = upContato.get();
+					newContato.setId(contato.getId());
 					newContato.setTipocontato(contato.getTipocontato());
 					newContato.setContato(contato.getContato());
 					newContato.setPessoa(contato.getPessoa());
@@ -54,7 +55,7 @@ public class ContatoService implements ContatoServiceInterface{
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
+		contatoRepository.deleteById(id);
 		
 	}
 
