@@ -7,25 +7,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.gms.AppPessoas.model.Contato;
+import br.com.gms.AppPessoas.model.Pessoa;
 import br.com.gms.AppPessoas.repository.ContatoRepository;
+import br.com.gms.AppPessoas.repository.PessoaRepository;
 import br.com.gms.AppPessoas.service.interfaces.ContatoServiceInterface;
 
 @Service
 public class ContatoService implements ContatoServiceInterface{
 	
 	private ContatoRepository contatoRepository;
+	private PessoaRepository pessoaRepository;
 	
 	@Autowired
-	public ContatoService(ContatoRepository contatoRepository) {
+	public ContatoService(ContatoRepository contatoRepository, PessoaRepository pessoaRepository) {
 		this.contatoRepository = contatoRepository;
+		this.pessoaRepository = pessoaRepository;
 	}
 	
 
 	@Override
-	public Contato save(Contato contato){
-		return contatoRepository.save(contato);
-		
+	public Contato save(Long pessoa_id, Contato contato){
+	    Optional<Pessoa> id = pessoaRepository.findById(pessoa_id);
+	    return contatoRepository.save(contato);
 	}
+
+		
 
 	@Override
 	public Optional<Contato> getById(Long id) {
@@ -57,6 +63,12 @@ public class ContatoService implements ContatoServiceInterface{
 	public void delete(Long id) {
 		contatoRepository.deleteById(id);
 		
+	}
+
+
+	@Override
+	public Contato save(Contato contato) {
+		return contatoRepository.save(contato);
 	}
 
 }

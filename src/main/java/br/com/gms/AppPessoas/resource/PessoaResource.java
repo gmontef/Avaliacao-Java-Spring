@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 import br.com.gms.AppPessoas.model.Pessoa;
 import br.com.gms.AppPessoas.service.PessoaService;
 
@@ -29,6 +31,7 @@ public class PessoaResource {
 	}
 	
 	@GetMapping
+	@Operation(summary = "Retorna todas as pessoas")
 	public ResponseEntity<List<Pessoa>> getAllPessoas(){
 		List<Pessoa> pessoas = pessoaService.getAll();
 		if(pessoas == null)
@@ -38,6 +41,7 @@ public class PessoaResource {
 }
 	
 	@PostMapping
+	@Operation(summary = "Salva uma nova pessoa")
 	public ResponseEntity<Pessoa> save(@RequestBody Pessoa pessoa){
 		Pessoa newPessoa = pessoaService.save(pessoa);
 		if(newPessoa == null)
@@ -46,6 +50,7 @@ public class PessoaResource {
 	}
 	
 	@PutMapping
+	@Operation(summary = "Atualiza uma pessoa existente")
 	public ResponseEntity<Pessoa> update(@RequestBody Pessoa pessoa){
 		Pessoa newPessoa = pessoaService.update(pessoa);
 		if(newPessoa == null)
@@ -54,6 +59,7 @@ public class PessoaResource {
 	}
 	
 	@DeleteMapping("/{id}")
+	@Operation(summary = "Exclui uma pessoa pelo ID")
 	public ResponseEntity<?> delete(@PathVariable Long id){
 		pessoaService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);

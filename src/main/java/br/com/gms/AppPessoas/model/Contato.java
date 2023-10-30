@@ -2,7 +2,6 @@ package br.com.gms.AppPessoas.model;
 
 import java.util.Objects;
 
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,15 +25,31 @@ public class Contato {
 	private Pessoa pessoa;
 	
 	@Column(nullable = false)
-	private int tipocontato;
+	private TipoContato tipocontato;
 	
 	@Column(nullable = false)
 	private Long contato;
+
+	public enum TipoContato {
+		TELEFONE(0),
+		CELULAR(1);
+
+		private int value;
+
+		TipoContato(int value) {
+			this.value = value;
+		}
+
+		public int getValue() {
+			return value;
+		}
+	}
 	
 	public Contato() {}
 
-	public Contato(Long id, Pessoa pessoa, int tipocontato, Long contato) {
+	public Contato(Long id, Pessoa pessoa, TipoContato tipocontato, Long contato) {
 		this.id = id;
+		this.pessoa = pessoa;
 		this.tipocontato = tipocontato;
 		this.contato = contato;
 	}
@@ -54,11 +69,11 @@ public class Contato {
 		this.pessoa = pessoa;
 	}
 
-	public int getTipocontato() {
+	public TipoContato getTipocontato() {
 		return tipocontato;
 	}
 
-	public void setTipocontato(int tipocontato) {
+	public void setTipocontato(TipoContato tipocontato) {
 		this.tipocontato = tipocontato;
 	}
 
@@ -83,10 +98,9 @@ public class Contato {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Contato other = (Contato) obj;
-		return id == other.id;
-	}
-	
-	
+		
+        Contato other = (Contato) obj;
 
+        return id == other.id;	
+    }
 }
