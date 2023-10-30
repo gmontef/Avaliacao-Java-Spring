@@ -18,7 +18,7 @@ public class Contato {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "pessoa_id", referencedColumnName = "id")
@@ -32,17 +32,16 @@ public class Contato {
 	
 	public Contato() {}
 
-	public Contato(int id, Pessoa pessoa, int tipocontato, Long contato) {
+	public Contato(Long id, Pessoa pessoa, int tipocontato, Long contato) {
 		this.id = id;
-		this.pessoa = pessoa;
 		this.tipocontato = tipocontato;
 		this.contato = contato;
 	}
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

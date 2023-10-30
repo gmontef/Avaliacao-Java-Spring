@@ -16,21 +16,21 @@ public class Pessoa {
 	
 	    @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-		private int id;
+		private Long id;
 	     
 	    @Column(nullable = false)
 	    private String nome;
 	    @Column
 		private String endereco;
 	    @Column
-		private Long cep;
+		private String cep;
 	    @Column
 		private String cidade;
 	    @Column
 		private String uf;
 
 		public Pessoa() {}
-		public Pessoa(int id, String nome, String endereco, Long cep, String cidade, String uf){
+		public Pessoa(Long id, String nome, String endereco, String cep, String cidade, String uf){
 			this.id = id;
 			this.nome = nome;
 			this.endereco = endereco;
@@ -38,10 +38,10 @@ public class Pessoa {
 			this.cidade = cidade;
 			this.uf = uf;	
 		}
-		public int getId() {
+		public Long getId() {
 			return id;
 		}
-		public void setId(int id) {
+		public void setId(Long id) {
 			this.id = id;
 		}
 		public String getNome() {
@@ -56,10 +56,10 @@ public class Pessoa {
 		public void setEndereco(String endereco) {
 			this.endereco = endereco;
 		}
-		public Long getCep() {
+		public String getCep() {
 			return cep;
 		}
-		public void setCep(Long cep) {
+		public void setCep(String cep) {
 			this.cep = cep;
 		}
 		public String getCidade() {
