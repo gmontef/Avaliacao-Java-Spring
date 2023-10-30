@@ -38,7 +38,6 @@ public class Contato {
 		this.tipocontato = tipocontato;
 		this.contato = contato;
 	}
-
 	public int getId() {
 		return id;
 	}
