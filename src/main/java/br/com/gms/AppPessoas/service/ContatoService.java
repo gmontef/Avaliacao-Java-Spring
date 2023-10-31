@@ -27,11 +27,16 @@ public class ContatoService implements ContatoServiceInterface{
 
 	@Override
 	public Contato save(Long pessoa_id, Contato contato){
-	    Optional<Pessoa> id = pessoaRepository.findById(pessoa_id);
-	    return contatoRepository.save(contato);
+	    Optional<Pessoa> pessoaOptional = pessoaRepository.findById(pessoa_id);
+	    if (pessoaOptional.isPresent()) {
+	        Pessoa pessoa = pessoaOptional.get();
+	        contato.setPessoa(pessoa);
+	        return contatoRepository.save(contato);
+	    } else {
+	        throw new RuntimeException("Pessoa com ID " + pessoa_id + " não encontrada");
+	    }
 	}
 
-		
 
 	@Override
 	public Optional<Contato> getById(Long id) {

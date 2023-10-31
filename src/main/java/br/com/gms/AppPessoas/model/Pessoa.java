@@ -1,12 +1,18 @@
 package br.com.gms.AppPessoas.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -28,6 +34,10 @@ public class Pessoa {
 		private String cidade;
 	    @Column
 		private String uf;
+	    
+	    @JsonIgnore
+	    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
+	    private List<Contato> contatos;
 
 		public Pessoa() {}
 		public Pessoa(Long id, String nome, String endereco, String cep, String cidade, String uf){
@@ -89,7 +99,14 @@ public class Pessoa {
 			Pessoa other = (Pessoa) obj;
 			return id == other.id;
 		}
-		
-		
-			
-}
+		public List<Contato> getContatos() {
+			return contatos;
+		}
+		public void addContato(Contato novoContato) {
+		    if (contatos == null) {
+		        contatos = new ArrayList<>();
+		    }
+		    contatos.add(novoContato);
+		    novoContato.setPessoa(this);
+		}
+		}

@@ -2,9 +2,12 @@ package br.com.gms.AppPessoas.model;
 
 import java.util.Objects;
 
+import br.com.gms.AppPessoas.enums.TipoContato;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,25 +28,11 @@ public class Contato {
 	private Pessoa pessoa;
 	
 	@Column(nullable = false)
+	@Enumerated(EnumType.ORDINAL)
 	private TipoContato tipocontato;
 	
 	@Column(nullable = false)
 	private Long contato;
-
-	public enum TipoContato {
-		TELEFONE(0),
-		CELULAR(1);
-
-		private int value;
-
-		TipoContato(int value) {
-			this.value = value;
-		}
-
-		public int getValue() {
-			return value;
-		}
-	}
 	
 	public Contato() {}
 
@@ -53,6 +42,7 @@ public class Contato {
 		this.tipocontato = tipocontato;
 		this.contato = contato;
 	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -104,3 +94,4 @@ public class Contato {
         return id == other.id;	
     }
 }
+
